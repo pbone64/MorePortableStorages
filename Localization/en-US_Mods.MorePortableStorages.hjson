@@ -1,0 +1,8 @@
+Items: {
+	GrotesqueStatuette: {
+		DisplayName: Grotesque Statuette
+		Tooltip: Summons a flying safe to store your items
+	}
+}
+
+Projectiles.FlyingSafe.DisplayName: Flying Safe

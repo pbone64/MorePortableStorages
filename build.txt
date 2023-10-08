@@ -1,0 +1,8 @@
+displayName = More Portable Storages
+author = pbone
+version = 1.0.0
+buildIgnore = Mythril/*
+hideCode = false
+hideResources = false
+includeSource = true
+includePDB = false
