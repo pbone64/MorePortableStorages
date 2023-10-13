@@ -9,7 +9,7 @@ using ReLogic.Content;
 
 namespace MorePortableStorages.Content.Safe;
 
-internal sealed class FlyingSafe : BasePortableStorageProjectile {
+public class FlyingSafe : BasePortableStorageProjectile {
     public static Asset<Texture2D> HoverTexture;
 
     public override void Load() {

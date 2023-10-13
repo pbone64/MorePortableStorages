@@ -7,8 +7,8 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Core.Patches;
 
-internal sealed class TrySyncingMyPlayerPatch : BasePatch {
-    internal override void Patch(Mod mod) {
+public class TrySyncingMyPlayerPatch : BasePatch {
+    protected override void Patch(Mod mod) {
         IL_Main.TrySyncingMyPlayer += IL_Main_TrySyncingMyPlayer;
     }
 

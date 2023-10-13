@@ -6,8 +6,8 @@ using Terraria.ModLoader;
 namespace MorePortableStorages.Core.Patches;
 
 // DEPRECATED: IsInteractable gets inlined
-internal sealed class ProjectileIsInteractablePatch : BasePatch {
-    internal override void Patch(Mod mod) {
+public class ProjectileIsInteractablePatch : BasePatch {
+    protected override void Patch(Mod mod) {
         On_Projectile.IsInteractible += On_Projectile_IsInteractible;
     }
 

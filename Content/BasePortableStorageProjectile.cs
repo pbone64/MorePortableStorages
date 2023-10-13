@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Content; 
 
-internal abstract class BasePortableStorageProjectile : ModProjectile {
+public abstract class BasePortableStorageProjectile : ModProjectile {
     public override void AI() {
         Main.CurrentFrameFlags.HadAnActiveInteractibleProjectile = true;
 

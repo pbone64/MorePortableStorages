@@ -5,8 +5,8 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Core.PortableStorages;
 
-internal sealed class PortableStoragePlayer : ModPlayer {
-    internal TrackedProjectileReference[] PortableStorageTrackers;
+public class PortableStoragePlayer : ModPlayer {
+    public TrackedProjectileReference[] PortableStorageTrackers;
 
     public override void Initialize() {
         PortableStorageTrackers = new TrackedProjectileReference[PortableStorageLoader.RequiredProjectileTrackers];

@@ -9,64 +9,65 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Core.PortableStorages;
 
-internal static class PortableStorageLoader {
-    internal static IReadOnlyList<PortableStorage> PortableStorages => _portableStorages.AsReadOnly();
+public static class PortableStorageLoader {
+    public static IReadOnlyList<PortableStorage> PortableStorages => _portableStorages.AsReadOnly();
     private static readonly List<PortableStorage> _portableStorages = new();
     private static readonly Dictionary<int, (SoundStyle open, SoundStyle close)> _interactiveOpenCloseSounds = new();
     private static readonly Dictionary<int, int> _portableStorageProjectileTrackerIds = new();
 
-    internal static int PortableStorageCount => _portableStorages.Count;
-    internal static int RequiredProjectileTrackers => _portableStorageProjectileTrackerIds.Count;
+    public static int PortableStorageCount => _portableStorages.Count;
+    public static int RequiredProjectileTrackers => _portableStorageProjectileTrackerIds.Count;
 
-    internal static void RegisterPortableStorage(PortableStorage ps) {
-        ps.ID = PortableStorageCount;
+    public static void RegisterPortableStorage(PortableStorage ps) {
+        ps.AssignId(PortableStorageCount);
         _portableStorages.Add(ps);
         if (ps.AllocateStockProjectileTracker()) {
-            _portableStorageProjectileTrackerIds.Add(RequiredProjectileTrackers, ps.ID);
+            _portableStorageProjectileTrackerIds.Add(RequiredProjectileTrackers, ps.Id);
         }
     }
 
-    internal static void RegisterInteractiveOpenCloseSound(int projectileType, SoundStyle open, SoundStyle close) {
+    public static void RegisterInteractiveOpenCloseSound(int projectileType, SoundStyle open, SoundStyle close) {
         _interactiveOpenCloseSounds.Add(projectileType, (open, close));
     }
 
-    internal static bool TryPlayInteractiveOpenCloseSound(int projectileType, bool open) {
-        if (_interactiveOpenCloseSounds.TryGetValue(projectileType, out (SoundStyle open, SoundStyle close) sound)) {
-            SoundEngine.PlaySound(open ? sound.open : sound.close);
-            return true;
+    public static bool TryPlayInteractiveOpenCloseSound(int projectileType, bool open) {
+        if (!_interactiveOpenCloseSounds.TryGetValue(projectileType, out (SoundStyle open, SoundStyle close) sound)) {
+            return false;
         }
 
-        return false;
+        SoundEngine.PlaySound(open ? sound.open : sound.close);
+        return true;
+
     }
 
-    internal static void TryOpen<T>(Player player, Projectile projectileInstance) where T : PortableStorage {
+    public static void TryOpen<T>(Player player, Projectile projectileInstance) where T : PortableStorage {
         ModContent.GetInstance<T>().TryOpen(player, projectileInstance);
     }
 
-    internal static void Close<T>(Player player, Projectile projectile) where T : PortableStorage {
+    public static void Close<T>(Player player, Projectile projectile) where T : PortableStorage {
         ModContent.GetInstance<T>().Close(player);
     }
 
-    internal static ref TrackedProjectileReference GetProjectileTracker<T>(Player player) where T : PortableStorage {
+    public static ref TrackedProjectileReference GetProjectileTracker<T>(Player player) where T : PortableStorage {
         return ref ModContent.GetInstance<T>().GetProjectileTracker(player);
     }
 
-    internal static ref TrackedProjectileReference GetProjectileTracker(Player player, int id) {
+    public static ref TrackedProjectileReference GetProjectileTracker(Player player, int id) {
         return ref _portableStorages[id].GetProjectileTracker(player);
     }
 
-    internal static ref TrackedProjectileReference GetStockProjectileTracker(Player player, int id) {
+    public static ref TrackedProjectileReference GetStockProjectileTracker(Player player, int id) {
         return ref player.GetModPlayer<PortableStoragePlayer>()
             .PortableStorageTrackers[_portableStorageProjectileTrackerIds[id]];
     }
 
-    internal static void ClearTrackers(Player player) {
+    public static void ClearTrackers(Player player) {
         for (int i = 0; i < PortableStorageCount; i++) {
             PortableStorages[i].GetProjectileTracker(player).Clear();
         }
     }
 
-    internal static bool NeedsSyncing(Player localPlayer, Player clientPlayer) {
+    public static bool NeedsSyncing(Player localPlayer, Player clientPlayer) {
         for (int i = 0; i < PortableStorageCount; i++) {
             if (PortableStorages[i].GetProjectileTracker(localPlayer) !=
                 PortableStorages[i].GetProjectileTracker(clientPlayer)) {
@@ -77,7 +78,7 @@ internal static class PortableStorageLoader {
         return false;
     }
 
-    internal static int TryInteracting<T>(Player player, Projectile projectile) where T : PortableStorage {
+    public static int TryInteracting<T>(Player player, Projectile projectile) where T : PortableStorage {
         if (Main.gamePaused || Main.gameMenu) {
             return 0;
         }
@@ -129,7 +130,7 @@ internal static class PortableStorageLoader {
     }
 
     // We can't use the vanilla IsProjectileInteractableAndInRange method because Projectile.IsInteractable is small enough to get inlined
-    internal static bool IsInteractableAndInRange<T>(Player player, Projectile projectile, Vector2 compareSpot)
+    public static bool IsInteractableAndInRange<T>(Player player, Projectile projectile, Vector2 compareSpot)
         where T : PortableStorage {
         if (!projectile.active || !ModContent.GetInstance<T>().IsPortableStorageProjectile(projectile)) {
             return false;

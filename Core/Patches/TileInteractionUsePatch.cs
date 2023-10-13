@@ -9,8 +9,8 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Core.Patches;
 
-internal sealed class TileInteractionUsePatch : BasePatch {
-    internal override void Patch(Mod mod) {
+public class TileInteractionUsePatch : BasePatch {
+    protected override void Patch(Mod mod) {
         IL_Player.TileInteractionsUse += IL_Player_TileInteractionsUse;
     }
 
@@ -30,7 +30,7 @@ internal sealed class TileInteractionUsePatch : BasePatch {
             typeof(PortableStorageLoader).GetMethod(
                 nameof(PortableStorageLoader.ClearTrackers),
                 BindingFlags.Static | BindingFlags.NonPublic
-            )
+            )!
         );
     }
 }

@@ -10,8 +10,8 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Core.Patches;
 
-internal sealed class HandleBeingInChestRangePatch : BasePatch {
-    internal override void Patch(Mod mod) {
+public class HandleBeingInChestRangePatch : BasePatch {
+    protected override void Patch(Mod mod) {
         IL_Player.HandleBeingInChestRange += IL_Player_HandleBeingInChestRange;
         On_Player.HandleBeingInChestRange += On_Player_HandleBeingInChestRange;
     }

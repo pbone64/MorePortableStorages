@@ -5,10 +5,10 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Content.Safe;
 
-internal sealed class SafePortableStorage : PortableStorage {
-    internal override int Bank => BankID.Safe;
+public class SafePortableStorage : PortableStorage {
+    public override int Bank => BankID.Safe;
 
-    internal override bool IsPortableStorageProjectile(Projectile projectile) {
+    public override bool IsPortableStorageProjectile(Projectile projectile) {
         return projectile.type == ModContent.ProjectileType<FlyingSafe>();
     }
 }

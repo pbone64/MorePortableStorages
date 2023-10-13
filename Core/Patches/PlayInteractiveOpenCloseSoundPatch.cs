@@ -4,8 +4,8 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Core.Patches;
 
-internal sealed class PlayInteractiveOpenCloseSoundPatch : BasePatch {
-    internal override void Patch(Mod mod) {
+public class PlayInteractiveOpenCloseSoundPatch : BasePatch {
+    protected override void Patch(Mod mod) {
         On_Main.PlayInteractiveProjectileOpenCloseSound += On_Main_PlayInteractiveProjectileOpenCloseSound;
     }
 

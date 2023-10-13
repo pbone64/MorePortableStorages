@@ -1,3 +1,3 @@
 ﻿namespace MorePortableStorages.Content.Items;
 
-internal sealed class DefendersGem { }
+public class DefendersGem { }

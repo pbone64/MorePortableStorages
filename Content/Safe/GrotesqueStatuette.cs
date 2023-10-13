@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace MorePortableStorages.Content.Safe;
 
-internal sealed class GrotesqueStatuette : ModItem {
+public class GrotesqueStatuette : ModItem {
     public override void SetDefaults() {
         Item.width = 26;
         Item.height = 24;

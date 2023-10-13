@@ -4,23 +4,30 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Core;
 using Terraria.UI;
 
 namespace MorePortableStorages.Core.PortableStorages;
 
-internal abstract class PortableStorage : ModType {
-    internal abstract int Bank { get; }
+public abstract class PortableStorage : ModType {
+    public abstract int Bank { get; }
 
-    internal int ID;
+    public int Id { get; private set; } = -1;
 
-    internal virtual bool AllocateStockProjectileTracker() {
+    public void AssignId(int id) {
+        if (Id >= 0) {
+            throw new InvalidOperationException($"{nameof(PortableStorage)} already has an assigned ID.");
+        }
+
+        Id = id;
+    }
+
+    public virtual bool AllocateStockProjectileTracker() {
         return true;
     }
 
-    internal abstract bool IsPortableStorageProjectile(Projectile projectile);
+    public abstract bool IsPortableStorageProjectile(Projectile projectile);
 
-    internal virtual void TryOpen(Player player, Projectile projectileInstance) {
+    public virtual void TryOpen(Player player, Projectile projectileInstance) {
         if (!IsPortableStorageProjectile(projectileInstance)) {
             return;
         }
@@ -43,20 +50,20 @@ internal abstract class PortableStorage : ModType {
         Recipe.FindRecipes();
     }
 
-    internal virtual void Close(Player player) {
+    public virtual void Close(Player player) {
         Main.PlayInteractiveProjectileOpenCloseSound(GetProjectileTracker(player).ProjectileType, false);
         player.chest = BankID.None;
         Recipe.FindRecipes();
     }
 
-    internal virtual ref TrackedProjectileReference GetProjectileTracker(Player player) {
+    public virtual ref TrackedProjectileReference GetProjectileTracker(Player player) {
         if (!AllocateStockProjectileTracker()) {
             throw new Exception(
                 $"{nameof(AllocateStockProjectileTracker)} returned false but the base {nameof(GetProjectileTracker)} implementation was called. A custom implementation is required for portable storages that don't use provided trackers."
             );
         }
 
-        return ref PortableStorageLoader.GetStockProjectileTracker(player, ID);
+        return ref PortableStorageLoader.GetStockProjectileTracker(player, Id);
     }
 
     protected sealed override void Register() {
