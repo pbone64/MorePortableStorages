@@ -78,7 +78,7 @@ public static class PortableStorageLoader {
         return false;
     }
 
-    public static int TryInteracting<T>(Player player, Projectile projectile) where T : PortableStorage {
+    public static int TryInteracting<T>(Player player, Projectile projectile, int cursorIcon) where T : PortableStorage {
         if (Main.gamePaused || Main.gameMenu) {
             return 0;
         }
@@ -104,7 +104,7 @@ public static class PortableStorageLoader {
         if (containsMouse) {
             player.noThrow = 2;
             player.cursorItemIconEnabled = true;
-            player.cursorItemIconID = ModContent.ItemType<GrotesqueStatuette>();
+            player.cursorItemIconID = cursorIcon;
         }
 
         if (PlayerInput.UsingGamepad) {

@@ -27,10 +27,7 @@ public class TileInteractionUsePatch : BasePatch {
         c.Emit(OpCodes.Ldarg_0);
         c.Emit(
             OpCodes.Call,
-            typeof(PortableStorageLoader).GetMethod(
-                nameof(PortableStorageLoader.ClearTrackers),
-                BindingFlags.Static | BindingFlags.NonPublic
-            )!
+            ILUtils.GetMethod(() => PortableStorageLoader.ClearTrackers(null))
         );
     }
 }

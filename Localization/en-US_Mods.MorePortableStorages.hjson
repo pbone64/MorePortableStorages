@@ -3,6 +3,14 @@ Items: {
 		DisplayName: Grotesque Statuette
 		Tooltip: Summons a flying safe to store your items
 	}
+
+	EterniaCrystalShard: {
+		DisplayName: Eternia Crystal Shard
+		Tooltip: Summons a miniature defender's forge to store your items
+	}
 }
 
-Projectiles.FlyingSafe.DisplayName: Flying Safe
+Projectiles: {
+	FlyingSafe.DisplayName: Flying Safe
+	FloatingDefendersForge.DisplayName: Floating Defender's Forge
+}
