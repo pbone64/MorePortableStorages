@@ -5,6 +5,10 @@ using Terraria.ModLoader;
 namespace MorePortableStorages.Content.DefendersForge;
 
 public class EterniaCrystalShard : ModItem {
+    public override void SetStaticDefaults() {
+        ItemID.Sets.ShimmerTransformToItem[ItemID.DefendersForge] = Type;
+    }
+
     public override void SetDefaults() {
         Item.width = 20;
         Item.height = 22;

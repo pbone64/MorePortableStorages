@@ -10,7 +10,8 @@ namespace MorePortableStorages.Content;
 
 public abstract class BasePortableStorageProjectile<TPortableStorage> : ModProjectile where TPortableStorage : PortableStorage {
     public abstract int CursorIcon { get; }
-    public virtual string HoverTexturePath => Texture + "_HoverOutline";
+    public virtual string HoverTexturePath => _hoverTexturePath ??= Texture + "_HoverOutline";
+    private string _hoverTexturePath;
     
     protected static Asset<Texture2D> HoverTexture { get; set; }
     

@@ -5,6 +5,10 @@ using Terraria.ModLoader;
 namespace MorePortableStorages.Content.Safe;
 
 public class GrotesqueStatuette : ModItem {
+    public override void SetStaticDefaults() {
+        ItemID.Sets.ShimmerTransformToItem[ItemID.Safe] = Type;
+    }
+
     public override void SetDefaults() {
         Item.width = 26;
         Item.height = 24;

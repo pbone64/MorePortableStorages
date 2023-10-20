@@ -14,3 +14,5 @@ Projectiles: {
 	FlyingSafe.DisplayName: Flying Safe
 	FloatingDefendersForge.DisplayName: Floating Defender's Forge
 }
+
+DropConditions.GrotesqueStatuette: Rarely drops in the dungeon after defeating Plantera

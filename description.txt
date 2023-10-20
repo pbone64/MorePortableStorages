@@ -1,1 +1,6 @@
-More Portable Storages is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+The Money Trough and Void Bag are pretty nice, so how about items that let you access your Safe and Defenders Forge from anywhere?
+
+This mod introduces just that: a portable storage item to access you Safe or Defender's Forge from anywhere! They can both be obtained by shimmering either a Safe or Defender's Forge.
+
+GitHub: https://github.com/Pbone3/MorePortableStorages
+Discord: https://discord.gg/TRJqeq3Acm
